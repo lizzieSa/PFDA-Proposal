@@ -1,0 +1,52 @@
+# Bake a Cake and Eat It Too!
+
+## Repository
+<Link to your project's public GitHub respository>
+
+## Description
+My program will allow the user to design a cake that they can take one bite of before the program forces quits on them. 
+It is relevant to media and digital arts because it allows the user to come up their own design for a cake ad will play on the 
+occasionally thing in games where it lightly scares the user by taking control of the program when it force quits on its own.
+
+## Features
+- Cake making
+	- In the terminal it will prompt the user for an input of cerain flavours, icings, and toppings that will 
+    determine what the cake looks like before it is printed on screen
+- Eating
+	- by pressing spacebar the user will place a small black mark on th screen that makes it look like a bite has been taken out of 
+  the cake and will print text on the bottom of the cake saying "wait..." and whe pressed again it will print a small bomb in 
+  place of the cake and say "the cake was a lie!" at the bottom
+- Explosion 
+	- There will a counter loop for how many times spacebar is hit so that if it is pressed more than twice it will cause a flashing
+  red to appear over the whole screen for a short time which will done in a similar way to the digital rain lab and after it is 
+  done flashing it will close out the game
+
+## Challenges
+- I might need to research how to get the cake too print in the specific shape I want with user inputs determing the colors and 
+  some of the shapes
+- will need to learn how to make a couter loop using user inputs and how to put text on the screen usinf draw.text
+- I will need to research how to get the flashig to happen for only a certain amount of time
+
+## Outcomes
+Ideal Outcome:
+- The ideal outcome would be that the code flows smoothly together and the cake has no issues appearing on screen and it is a fun 
+  shock factor at the end when the cake exploded upon being revealed to be a lie.
+
+Minimal Viable Outcome:
+- At the very least I want the cake to have one editable feature, there to be a bomb that appears under the cake and for the
+  program to forcequit after revealing the bomb.
+
+## Milestones
+
+- Week 1
+  1. Implement the base game code of an intialization, game loop, and shut down
+  2. Add in code to get user input and get the first pass of the cake class done
+
+- Week 2
+  1. Get the code to draw the cake according to user input on screen 
+  2. get bomb to be revealed under the cake
+
+- Week N (Final)
+  1. Make explosion animation
+  2. Get the program to force quit itself
+  3. Code cleanup
