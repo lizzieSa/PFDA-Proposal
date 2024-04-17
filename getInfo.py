@@ -25,11 +25,12 @@ class Cake():
         surface.blit(self.surface, self.pos)
 
 class Icing():
-    def __init__(self, pos=(0, 0), size=210):
+    def __init__(self, pos=(295, 195), size=210):
         self.pos = pos
+        self.pos_2 = (295, 300)
         self.size = size
         self.color = pygame.Color(0, 255, 0)
-        cake_flavour = input("Cake flavour? ")
+        cake_flavour = input("Icing flavour? ")
         flavour = cake_flavour.lower()
         if flavour == "red":
             self.color = pygame.Color(255,0,0)
@@ -37,17 +38,53 @@ class Icing():
             self.color = pygame.Color(0,255,0)
         elif flavour == "blue":
             self.color = pygame.Color(0,0,255)
-        self.surface = self.update_surface()
+        self.surface_top = self.update_surface(1)
+        self.surface_bot = self.update_surface(2)
 
-    def update_surface(self):
-        surf = pygame.Surface((self.size, self.size))
+    def update_surface(self, topBottom):
+        if topBottom == 1:
+            surf = pygame.Surface((self.size, (self.size)-150))
+        else:
+            surf = pygame.Surface((self.size, 30))
         surf.fill(self.color)
         return surf
+        
     
     def draw(self, surface):
-        surface.blit(self.surface, self.pos)   
+        surface.blit(self.surface_top, self.pos)  
+        surface.blit(self.surface_bot, self.pos_2) 
 
+class Candles():
+    def __init__(self, pos=(325, 135), size=210):
+        self.pos = pos
+        self.pos_2 = (385, 135)
+        self.pos_3 = (445, 135)
+        self.size = size
+        self.color = pygame.Color(0, 255, 0)
+        cake_flavour = input("Candle colour? ")
+        flavour = cake_flavour.lower()
+        if flavour == "red":
+            self.color = pygame.Color(255,0,0)
+        elif flavour == "green":
+            self.color = pygame.Color(0,255,0)
+        elif flavour == "blue":
+            self.color = pygame.Color(0,0,255)
+        self.surface_left = self.update_surface(1)
+        self.surface_middle = self.update_surface(2)
+        self.surface_right = self.update_surface(3)
+
+    def update_surface(self, LeftRightMiddle):
+        surf = pygame.Surface((30, 60))
+        surf.fill(self.color)
+        return surf
         
+    
+    def draw(self, surface):
+        surface.blit(self.surface_left, self.pos)  
+        surface.blit(self.surface_middle, self.pos_2) 
+        surface.blit(self.surface_right, self.pos_3)
+
+
 class Particle():
 
     def __init__(self, pos=(0, 0), size=15):
@@ -128,6 +165,8 @@ def main():
     clock = pygame.time.Clock()
     resolution = (800, 600)
     particle = Cake()
+    frosting = Icing()
+    fires = Candles()
     screen = pygame.display.set_mode(resolution)
     running = True
     while running:
@@ -147,6 +186,8 @@ def main():
         screen.fill(black)
         particle.pos = ((resolution[0]//2)-105, (resolution[1]//2)-105)
         particle.draw(screen)
+        frosting.draw(screen)
+        fires.draw(screen)
         pygame.display.flip()
     pygame.quit()
 
