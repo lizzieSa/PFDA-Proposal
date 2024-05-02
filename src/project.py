@@ -1,4 +1,5 @@
 import pygame
+import math
 
 pygame.font.init()
 
@@ -203,10 +204,33 @@ class Surprise():
     def draw(self, surface):
         surface.blit(pygame.font.Font.render(self.font, f"The cake is a LIE!!!", True, (255,255,255)), self.pos)
 
+class Explosion():
+    def __init__(self, pos = (0,0), size= 800):
+        self.pos = pos
+        self.size = size
+        self.color = pygame.Color(255, 0, 0)
+        self.age = 0
+        self.alpha = 255
+        self.surface = self.update_surface()
+    
+    def update(self,dt):
+        self.age += dt
+        self.alpha = 255 * (math.sin(math.radians(self.age)) + 1) / 2
+    
+    def update_surface(self):
+        surf = pygame.Surface((self.size, self.size))
+        surf.fill(self.color)
+        return surf
+    
+    def draw(self, surface):
+        self.surface.set_alpha(self.alpha)
+        surface.blit(self.surface, self.pos)
+
 def main():
     pygame.init()
     pygame.display.set_caption("Bake Your Cake and Eat it Too!")
     clock = pygame.time.Clock()
+    dt = 0
     resolution = (800, 600)
     particle = Cake()
     frosting = Icing()
@@ -218,10 +242,12 @@ def main():
     text1 = toEat()
     text2 = Suspicion()
     text3 = Surprise()
+    boom = Explosion()
     screen = pygame.display.set_mode(resolution)
     running = True
     cakedraw = True
     bombdraw = False
+    kaboomdraw = False
     spacecount = 0
     while running:
         #cake = CakeStuff()
@@ -229,6 +255,7 @@ def main():
         #screen.fill(cake_fill(cake_flavour))
         #screen.blit(cake_fill(cake_flavour))
         pygame.display.flip()
+        boom.update(dt)
         dt = clock.tick(12)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -245,6 +272,9 @@ def main():
                 spacecount += 1
                 cakedraw = False
                 bombdraw = False
+                kaboomdraw = True
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and spacecount == 3:
+                running = False
 
         black = pygame.Color(0, 0, 0)
         screen.fill(black)
@@ -263,6 +293,8 @@ def main():
             if spacecount == 1:
                 text2.draw(screen)
                 bite.draw(screen)
+        if kaboomdraw:
+            boom.draw(screen)
 
 
         pygame.display.flip()
